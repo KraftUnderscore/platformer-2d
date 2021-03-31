@@ -21,30 +21,57 @@ public class PlayerController : MonoBehaviour
 
     private Vector2 current_velocity;
     private Rigidbody2D rigid;
+    private Animator anim;
     private bool playerDirection;
     private bool isGrounded;
 
     private void Awake()
     {
         rigid = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
         isGrounded = true;
     }
 
     public void OnMove(InputAction.CallbackContext context)
     {
         movementInput = context.ReadValue<float>();
+        anim.SetBool("isWalking", !(movementInput == 0));
     }
 
     public void OnJump(InputAction.CallbackContext context)
     {
         if (context.started)
+        {
             jumpInput = true;
+            anim.SetTrigger("jump");
+        }
     }
 
     public void OnInteract(InputAction.CallbackContext context)
     {
         if (context.started)
+        {
             interactInput = true;
+            anim.SetTrigger("interact");
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        Debug.Log(collision.gameObject.name);
+        if (collision.transform.CompareTag("MovingPlatform"))
+            transform.SetParent(collision.transform);
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.transform.CompareTag("MovingPlatform"))
+            transform.parent = null;
+    }
+
+    private void Update()
+    {
+        anim.SetFloat("fallingSpeed", rigid.velocity.y);
     }
 
     private void FixedUpdate()
