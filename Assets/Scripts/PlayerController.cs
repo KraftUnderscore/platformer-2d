@@ -15,6 +15,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float movementSpeed;
     [Range(0f, 1f)] [SerializeField] private float movementSmoothing;
 
+    [SerializeField] private AudioClip[] audioClips;
+
     private float movementInput;
     private bool interactInput;
     private bool jumpInput;
@@ -22,6 +24,7 @@ public class PlayerController : MonoBehaviour
     private Vector2 current_velocity;
     private Rigidbody2D rigid;
     private Animator anim;
+    private AudioSource sound;
     private bool playerDirection;
     private bool isGrounded;
 
@@ -29,7 +32,14 @@ public class PlayerController : MonoBehaviour
     {
         rigid = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+        sound = GetComponent<AudioSource>();
         isGrounded = true;
+    }
+
+    public void FootstepEvent()
+    {
+        sound.clip = audioClips[Random.Range(0, audioClips.Length)];
+        sound.Play();
     }
 
     public void OnMove(InputAction.CallbackContext context)
@@ -58,7 +68,6 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log(collision.gameObject.name);
         if (collision.transform.CompareTag("MovingPlatform"))
             transform.SetParent(collision.transform);
     }
