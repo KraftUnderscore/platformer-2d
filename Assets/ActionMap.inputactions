@@ -78,7 +78,7 @@
                 {
                     "name": "negative",
                     "id": "6210bb70-a61d-409f-b795-641d71eec31c",
-                    "path": "<Gamepad>/rightStick/left",
+                    "path": "<Gamepad>/leftStick/left",
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
@@ -89,7 +89,7 @@
                 {
                     "name": "positive",
                     "id": "bc469b54-df48-4e00-ac3d-48876119d208",
-                    "path": "<Gamepad>/rightStick/right",
+                    "path": "<Gamepad>/leftStick/right",
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
@@ -110,11 +110,33 @@
                 },
                 {
                     "name": "",
+                    "id": "60d9179b-4335-4f33-8a90-6ede299a4de2",
+                    "path": "<Gamepad>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "e42ca8eb-13fd-4ed7-8887-2871d3b148fc",
                     "path": "<Keyboard>/e",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
+                    "action": "Interact",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5e1cd730-67bf-4a95-9c39-94044b686e9b",
+                    "path": "<Gamepad>/buttonWest",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
                     "action": "Interact",
                     "isComposite": false,
                     "isPartOfComposite": false
