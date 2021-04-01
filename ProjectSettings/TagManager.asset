@@ -8,6 +8,8 @@ TagManager:
   - damage
   - coin
   - laser
+  - bullet
+  - flag
   layers:
   - Default
   - TransparentFX

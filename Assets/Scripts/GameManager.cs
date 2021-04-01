@@ -10,6 +10,8 @@ public class GameManager : MonoBehaviour
 {
     [HideInInspector] public static GameManager instance;
 
+    [SerializeField] private int maxHealth;
+
     [SerializeField] private GameObject UI;
     [SerializeField] private TextMeshProUGUI scoreValue;
 
@@ -29,6 +31,7 @@ public class GameManager : MonoBehaviour
     private bool isPaused;
 
     private int currentLevel;
+    private int currentHealth;
 
     private void Awake()
     {
@@ -53,6 +56,7 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(UI.gameObject);
 
         currentLevel = 0;
+        currentHealth = maxHealth;
         gameOverMenu.SetActive(false);
         menu.SetActive(false);
         winMenu.SetActive(false);
@@ -68,9 +72,10 @@ public class GameManager : MonoBehaviour
         scoreValue.text = score.ToString();
     }
 
-    public void UpdateHealth(int health)
+    public bool UpdateHealth()
     {
-        hearts[health].sprite = emptyHeart;
+        hearts[--currentHealth].sprite = emptyHeart;
+        return currentHealth != 0;
     }
 
     public void EndGame()
@@ -113,7 +118,7 @@ public class GameManager : MonoBehaviour
     public void ResetGame()
     {
         SceneManager.LoadScene(1);
-        PlayerController.instance.ResetPlayer();
+        currentHealth = maxHealth;
         menu.SetActive(false);
         gameOverMenu.SetActive(false);
         winMenu.SetActive(false);
@@ -140,7 +145,6 @@ public class GameManager : MonoBehaviour
         {
             currentLevel++;
             SceneManager.LoadScene(2);
-            PlayerController.instance.transform.position = Vector2.zero;
         }
     }
 

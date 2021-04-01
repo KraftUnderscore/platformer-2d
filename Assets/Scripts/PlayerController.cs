@@ -6,7 +6,6 @@ public class PlayerController : MonoBehaviour
 {
     public static PlayerController instance;
 
-    [SerializeField] private int maxHealth;
     [SerializeField] private float immortalityTime;
 
     [SerializeField] private float jumpForce;
@@ -33,7 +32,6 @@ public class PlayerController : MonoBehaviour
     private Animator anim;
     private AudioSource sound;
 
-    private int currentHealth;
     private bool playerDirection;
     private bool isGrounded;
     private bool canTakeDamage;
@@ -42,28 +40,20 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         if (instance == null)
+        {
             instance = this;
+        }
         else
+        {
             DestroyImmediate(gameObject);
+        }
         
-        DontDestroyOnLoad(gameObject);
-
         rigid = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         sound = GetComponent<AudioSource>();
         isGrounded = true;
         isAlive = true;
         canTakeDamage = true;
-        currentHealth = maxHealth;
-    }
-
-    public void ResetPlayer()
-    {
-        rigid.velocity = Vector2.zero;
-        current_velocity = Vector2.zero;
-        transform.position = Vector2.zero;
-        currentHealth = maxHealth;
-        isAlive = true;
     }
 
     public void FootstepEvent()
@@ -132,8 +122,8 @@ public class PlayerController : MonoBehaviour
         if (!canTakeDamage) return;
 
         canTakeDamage = false;
-        GameManager.instance.UpdateHealth(--currentHealth);
-        if (currentHealth <= 0)
+        bool isAlive = GameManager.instance.UpdateHealth();
+        if (!isAlive)
         {
             Die();
         }

@@ -6,6 +6,7 @@ using UnityEngine;
 [RequireComponent(typeof(Collider2D))]
 public class Bullet : MonoBehaviour
 {
+    [SerializeField] private string[] tags;
     [SerializeField] private float speed;
     [SerializeField] private float disableTime;
 
@@ -34,7 +35,9 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("laser") || collision.CompareTag("coin")) return;
+        foreach(string tag in tags)
+            if (collision.CompareTag(tag)) return;
+
         if (collision.CompareTag("Player"))
         {
             PlayerController.instance.GetDamage();
