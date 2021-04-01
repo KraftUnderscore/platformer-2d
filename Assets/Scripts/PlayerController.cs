@@ -104,7 +104,8 @@ public class PlayerController : MonoBehaviour
 
         Debug.Log("You got DAMAGEd");
         canTakeDamage = false;
-        if (--currentHealth <= 0)
+        GameManager.instance.UpdateHealth(--currentHealth);
+        if (currentHealth <= 0)
         {
             Die();
         }
@@ -114,7 +115,6 @@ public class PlayerController : MonoBehaviour
             sound.clip = damageSound;
             sound.Play();
             StartCoroutine(ImmortalityTimer());
-            GameManager.instance.UpdateHealth(currentHealth);
         }
     }
 

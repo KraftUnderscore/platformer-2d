@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8615292242643468306}
   - component: {fileID: 8615292242643468305}
   - component: {fileID: 8615292242643468304}
+  - component: {fileID: 2563992438084340312}
   m_Layer: 0
   m_Name: Graphics
   m_TagString: Untagged
@@ -102,6 +103,22 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!58 &2563992438084340312
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8615292242643468319}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.44
 --- !u!1 &8615292243070165979
 GameObject:
   m_ObjectHideFlags: 0
@@ -142,7 +159,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8615292243874090424}
   - component: {fileID: 8615292243874090407}
-  - component: {fileID: 8615292243874090425}
   m_Layer: 0
   m_Name: SpinnerEnemy
   m_TagString: damage
@@ -180,19 +196,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 5
   holdTime: 3
---- !u!58 &8615292243874090425
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8615292243874090406}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.44

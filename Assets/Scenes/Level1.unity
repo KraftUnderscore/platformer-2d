@@ -594,7 +594,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &313982074
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1296,6 +1296,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51f01e46c3c3c62408bff9d8a3e3bbb2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scoreValue: {fileID: 646592730}
+  menu: {fileID: 313982073}
+  heartsContainer: {fileID: 743960457}
+  emptyHeart: {fileID: -5402533863154111428, guid: 97db1429da2949f4a8fd5126b290eda0, type: 3}
 --- !u!4 &613193613
 Transform:
   m_ObjectHideFlags: 0
@@ -2206,7 +2210,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -5890,7 +5894,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -5939,6 +5943,46 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 336421851, guid: 9d9d0b9eeb2ec894b82ff471a18c9606, type: 3}
+      propertyPath: m_ActionEvents.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 336421851, guid: 9d9d0b9eeb2ec894b82ff471a18c9606, type: 3}
+      propertyPath: m_ActionEvents.Array.data[3].m_ActionId
+      value: c0f05fe9-12e7-4a1b-91a8-2a152ac73955
+      objectReference: {fileID: 0}
+    - target: {fileID: 336421851, guid: 9d9d0b9eeb2ec894b82ff471a18c9606, type: 3}
+      propertyPath: m_ActionEvents.Array.data[3].m_ActionName
+      value: PlayerController/Pause[/Keyboard/escape]
+      objectReference: {fileID: 0}
+    - target: {fileID: 336421851, guid: 9d9d0b9eeb2ec894b82ff471a18c9606, type: 3}
+      propertyPath: m_ActionEvents.Array.data[3].m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 336421851, guid: 9d9d0b9eeb2ec894b82ff471a18c9606, type: 3}
+      propertyPath: m_ActionEvents.Array.data[3].m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 336421851, guid: 9d9d0b9eeb2ec894b82ff471a18c9606, type: 3}
+      propertyPath: m_ActionEvents.Array.data[3].m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 613193612}
+    - target: {fileID: 336421851, guid: 9d9d0b9eeb2ec894b82ff471a18c9606, type: 3}
+      propertyPath: m_ActionEvents.Array.data[3].m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 336421851, guid: 9d9d0b9eeb2ec894b82ff471a18c9606, type: 3}
+      propertyPath: m_ActionEvents.Array.data[3].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Pause
+      objectReference: {fileID: 0}
+    - target: {fileID: 336421851, guid: 9d9d0b9eeb2ec894b82ff471a18c9606, type: 3}
+      propertyPath: m_ActionEvents.Array.data[3].m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: GameManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 336421851, guid: 9d9d0b9eeb2ec894b82ff471a18c9606, type: 3}
+      propertyPath: m_ActionEvents.Array.data[3].m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 3664439983740675771, guid: 9d9d0b9eeb2ec894b82ff471a18c9606, type: 3}
       propertyPath: m_RootOrder
       value: 4
