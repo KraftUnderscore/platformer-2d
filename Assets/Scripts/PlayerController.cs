@@ -32,7 +32,6 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rigid;
     private Animator anim;
     private AudioSource sound;
-    private GameManager gameManager;
 
     private int currentHealth;
     private bool playerDirection;
@@ -48,7 +47,6 @@ public class PlayerController : MonoBehaviour
         isGrounded = true;
         canTakeDamage = true;
         currentHealth = maxHealth;
-        gameManager = GameManager.instance;
     }
 
     public void FootstepEvent()
@@ -116,7 +114,7 @@ public class PlayerController : MonoBehaviour
             sound.clip = damageSound;
             sound.Play();
             StartCoroutine(ImmortalityTimer());
-            gameManager.UpdateHealth(currentHealth);
+            GameManager.instance.UpdateHealth(currentHealth);
         }
     }
 
@@ -129,7 +127,7 @@ public class PlayerController : MonoBehaviour
     private void Die()
     {
         anim.SetBool("ded", true);
-        gameManager.EndGame();
+        GameManager.instance.EndGame();
     }
 
     private void Update()
