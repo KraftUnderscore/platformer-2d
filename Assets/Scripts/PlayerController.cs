@@ -1,8 +1,12 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
+    [SerializeField] private int maxHealth;
+    [SerializeField] private float immortalityTime;
+
     [SerializeField] private float jumpForce;
     [SerializeField] private LayerMask groundMask;
     [SerializeField] private Transform groundCheckPosition;
@@ -16,6 +20,7 @@ public class PlayerController : MonoBehaviour
     [Range(0f, 1f)] [SerializeField] private float movementSmoothing;
 
     [SerializeField] private AudioClip[] audioClips;
+    [SerializeField] private AudioClip damageSound;
 
     private float movementInput;
     private bool interactInput;
@@ -25,8 +30,12 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rigid;
     private Animator anim;
     private AudioSource sound;
+    private GameManager gameManager;
+
+    private int currentHealth;
     private bool playerDirection;
     private bool isGrounded;
+    private bool canTakeDamage;
 
     private void Awake()
     {
@@ -34,6 +43,9 @@ public class PlayerController : MonoBehaviour
         anim = GetComponent<Animator>();
         sound = GetComponent<AudioSource>();
         isGrounded = true;
+        canTakeDamage = true;
+        currentHealth = maxHealth;
+        gameManager = GameManager.instance;
     }
 
     public void FootstepEvent()
@@ -78,6 +90,45 @@ public class PlayerController : MonoBehaviour
             transform.parent = null;
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("damage"))
+            GetDamage();
+
+    }
+
+    private void GetDamage()
+    {
+        if (!canTakeDamage) return;
+
+        Debug.Log("You got DAMAGEd");
+        canTakeDamage = false;
+        if (--currentHealth <= 0)
+        {
+            Die();
+        }
+        else
+        {
+            anim.SetTrigger("damage");
+            sound.clip = damageSound;
+            sound.Play();
+            StartCoroutine(ImmortalityTimer());
+            gameManager.UpdateHealth(currentHealth);
+        }
+    }
+
+    private IEnumerator ImmortalityTimer()
+    {
+        yield return new WaitForSeconds(immortalityTime);
+        canTakeDamage = true;
+    }
+
+    private void Die()
+    {
+        anim.SetBool("ded", true);
+        gameManager.EndGame();
+    }
+
     private void Update()
     {
         anim.SetFloat("fallingSpeed", rigid.velocity.y);
@@ -85,6 +136,7 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (currentHealth <= 0) return;
         Interact();
         Move();
         GroundedCheck();

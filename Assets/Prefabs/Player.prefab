@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 31051965309784801}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -88,6 +88,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 624c4c33825995f489f2b63551256126, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxHealth: 3
+  immortalityTime: 0.5
   jumpForce: 250
   groundMask:
     serializedVersion: 2
@@ -99,14 +101,15 @@ MonoBehaviour:
     m_Bits: 128
   interactionPoint: {fileID: 8079457684115709257}
   interactionRadius: 0.25
-  movementSpeed: 10
-  movementSmoothing: 1
+  movementSpeed: 5
+  movementSmoothing: 0.566
   audioClips:
   - {fileID: 8300000, guid: e72c5411af193e34a8e110420f6b69fb, type: 3}
   - {fileID: 8300000, guid: 3116799a1a93b08448cc7de86e34b555, type: 3}
   - {fileID: 8300000, guid: fce9ffcddd8427744aeff16190338431, type: 3}
   - {fileID: 8300000, guid: 1817e6aa088123c48ad4f03ca2703f87, type: 3}
   - {fileID: 8300000, guid: 7d3d602328a287e48b7c3d3c7d75b6e5, type: 3}
+  damageSound: {fileID: 8300000, guid: 7cdd2df64f2bb3b44bdbb55286f7dd31, type: 3}
 --- !u!114 &336421851
 MonoBehaviour:
   m_ObjectHideFlags: 0
