@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private GameObject menu;
     [SerializeField] private GameObject gameOverMenu;
+    [SerializeField] private GameObject winMenu;
 
     [SerializeField] private Transform heartsContainer;
     [SerializeField] private Sprite emptyHeart;
@@ -31,11 +32,6 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        DontDestroyOnLoad(this);
-        DontDestroyOnLoad(PlayerController.instance);
-        DontDestroyOnLoad(BulletPool.instance);
-        DontDestroyOnLoad(UI);
-
         instance = this;
         isPaused = false;
         hearts = new Image[heartsContainer.childCount];
@@ -46,15 +42,20 @@ public class GameManager : MonoBehaviour
         slider.minValue = 0f;
         slider.maxValue = 1f;
         slider.value = 1f;
-        SceneManager.LoadScene(1);
     }
     private void Start()
     {
+        DontDestroyOnLoad(this);
+        DontDestroyOnLoad(UI.gameObject);
+
         currentLevel = 0;
         gameOverMenu.SetActive(false);
         menu.SetActive(false);
+        winMenu.SetActive(false);
         scoreValue.text = score.ToString();
         soundVolume.text = "100%";
+
+        SceneManager.LoadScene(1);
     }
 
     public void IncreaseScore()
@@ -109,6 +110,7 @@ public class GameManager : MonoBehaviour
         PlayerController.instance.ResetPlayer();
         menu.SetActive(false);
         gameOverMenu.SetActive(false);
+        winMenu.SetActive(false);
         score = 0;
         scoreValue.text = score.ToString();
         foreach (Image heart in hearts)
@@ -137,6 +139,6 @@ public class GameManager : MonoBehaviour
 
     private void Win()
     {
-
+        winMenu.SetActive(true);
     }
 }

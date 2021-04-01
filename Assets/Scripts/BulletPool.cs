@@ -14,6 +14,7 @@ public class BulletPool : MonoBehaviour
     {
         instance = this;
         bulletPool = new List<GameObject>();
+        DontDestroyOnLoad(this);
     }
 
     public GameObject GetBullet()

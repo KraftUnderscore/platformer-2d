@@ -49,12 +49,14 @@ public class PlayerController : MonoBehaviour
         isAlive = true;
         canTakeDamage = true;
         currentHealth = maxHealth;
+        DontDestroyOnLoad(this);
     }
 
     public void ResetPlayer()
     {
         rigid.velocity = Vector2.zero;
         current_velocity = Vector2.zero;
+        transform.position = Vector2.zero;
         currentHealth = maxHealth;
         isAlive = true;
     }
