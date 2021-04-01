@@ -9,6 +9,8 @@ public class Bullet : MonoBehaviour
     [SerializeField] private float speed;
     [SerializeField] private float disableTime;
 
+    [HideInInspector] public Vector2 direction;
+
     private Rigidbody2D rigid;
     private Collider2D col;
     private GameObject graphics;
@@ -27,12 +29,12 @@ public class Bullet : MonoBehaviour
         col.enabled = true;
         graphics.SetActive(true);
         splash.SetActive(false);
-        rigid.velocity = Vector2.left * speed;
+        rigid.velocity = direction * speed;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("laser")) return;
+        if (collision.CompareTag("laser") || collision.CompareTag("coin")) return;
         if (collision.CompareTag("Player"))
         {
             PlayerController.instance.GetDamage();

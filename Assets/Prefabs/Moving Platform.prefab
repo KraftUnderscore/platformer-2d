@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 1
+  holdTime: 0
 --- !u!1 &8469311393661576911
 GameObject:
   m_ObjectHideFlags: 0
@@ -83,6 +84,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4895729659228108578}
     m_Modifications:
+    - target: {fileID: 5230009537134457420, guid: 56530a647cc7fb24089869c03ecd712f, type: 3}
+      propertyPath: m_SortingOrder
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 6761964935794312480, guid: 56530a647cc7fb24089869c03ecd712f, type: 3}
       propertyPath: m_RootOrder
       value: 0

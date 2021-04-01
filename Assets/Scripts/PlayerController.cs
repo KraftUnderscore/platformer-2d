@@ -37,6 +37,7 @@ public class PlayerController : MonoBehaviour
     private bool playerDirection;
     private bool isGrounded;
     private bool canTakeDamage;
+    private bool isAlive;
 
     private void Awake()
     {
@@ -45,8 +46,17 @@ public class PlayerController : MonoBehaviour
         anim = GetComponent<Animator>();
         sound = GetComponent<AudioSource>();
         isGrounded = true;
+        isAlive = true;
         canTakeDamage = true;
         currentHealth = maxHealth;
+    }
+
+    public void ResetPlayer()
+    {
+        rigid.velocity = Vector2.zero;
+        current_velocity = Vector2.zero;
+        currentHealth = maxHealth;
+        isAlive = true;
     }
 
     public void FootstepEvent()
@@ -57,12 +67,16 @@ public class PlayerController : MonoBehaviour
 
     public void OnMove(InputAction.CallbackContext context)
     {
+        if (!isAlive) return;
+
         movementInput = context.ReadValue<float>();
         anim.SetBool("isWalking", !(movementInput == 0));
     }
 
     public void OnJump(InputAction.CallbackContext context)
     {
+        if (!isAlive) return;
+
         if (context.started)
         {
             jumpInput = true;
@@ -72,6 +86,8 @@ public class PlayerController : MonoBehaviour
 
     public void OnInteract(InputAction.CallbackContext context)
     {
+        if (!isAlive) return;
+
         if (context.started)
         {
             interactInput = true;
@@ -81,18 +97,24 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        if (!isAlive) return;
+
         if (collision.transform.CompareTag("MovingPlatform"))
             transform.SetParent(collision.transform);
     }
 
     private void OnCollisionExit2D(Collision2D collision)
     {
+        if (!isAlive) return;
+
         if (collision.transform.CompareTag("MovingPlatform"))
             transform.parent = null;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (!isAlive) return;
+
         if (collision.CompareTag("damage"))
             GetDamage();
 
@@ -102,7 +124,6 @@ public class PlayerController : MonoBehaviour
     {
         if (!canTakeDamage) return;
 
-        Debug.Log("You got DAMAGEd");
         canTakeDamage = false;
         GameManager.instance.UpdateHealth(--currentHealth);
         if (currentHealth <= 0)
@@ -126,18 +147,22 @@ public class PlayerController : MonoBehaviour
 
     private void Die()
     {
-        anim.SetBool("ded", true);
+        isAlive = false;
+        anim.SetTrigger("ded");
         GameManager.instance.EndGame();
     }
 
     private void Update()
     {
+        if (!isAlive) return;
+
         anim.SetFloat("fallingSpeed", rigid.velocity.y);
     }
 
     private void FixedUpdate()
     {
-        if (currentHealth <= 0) return;
+        if (!isAlive) return;
+
         Interact();
         Move();
         GroundedCheck();
