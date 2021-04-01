@@ -41,7 +41,13 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
-        instance = this;
+        if (instance == null)
+            instance = this;
+        else
+            DestroyImmediate(gameObject);
+        
+        DontDestroyOnLoad(gameObject);
+
         rigid = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         sound = GetComponent<AudioSource>();
@@ -49,7 +55,6 @@ public class PlayerController : MonoBehaviour
         isAlive = true;
         canTakeDamage = true;
         currentHealth = maxHealth;
-        DontDestroyOnLoad(this);
     }
 
     public void ResetPlayer()

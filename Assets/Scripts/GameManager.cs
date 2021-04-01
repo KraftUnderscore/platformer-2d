@@ -32,7 +32,11 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        instance = this;
+        if (instance == null)
+            instance = this;
+        else
+            DestroyImmediate(gameObject);
+
         isPaused = false;
         hearts = new Image[heartsContainer.childCount];
         for (int i = 0; i < hearts.Length; i++)
@@ -72,6 +76,8 @@ public class GameManager : MonoBehaviour
     public void EndGame()
     {
         gameOverMenu.SetActive(true);
+        isPaused = true;
+        Time.timeScale = 0f;
     }
 
     public void UpdateSlider()
@@ -112,6 +118,7 @@ public class GameManager : MonoBehaviour
         gameOverMenu.SetActive(false);
         winMenu.SetActive(false);
         score = 0;
+        currentLevel = 0;
         scoreValue.text = score.ToString();
         foreach (Image heart in hearts)
             heart.sprite = fullHeart;
@@ -140,5 +147,7 @@ public class GameManager : MonoBehaviour
     private void Win()
     {
         winMenu.SetActive(true);
+        isPaused = true;
+        Time.timeScale = 0f;
     }
 }

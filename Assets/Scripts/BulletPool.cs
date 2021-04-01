@@ -12,9 +12,13 @@ public class BulletPool : MonoBehaviour
 
     private void Awake()
     {
-        instance = this;
+        if (instance == null)
+            instance = this;
+        else
+            DestroyImmediate(gameObject);
+        
         bulletPool = new List<GameObject>();
-        DontDestroyOnLoad(this);
+        DontDestroyOnLoad(gameObject);
     }
 
     public GameObject GetBullet()
