@@ -9,7 +9,12 @@ public class GameManager : MonoBehaviour
 {
     [HideInInspector] public static GameManager instance;
     [SerializeField] private TextMeshProUGUI scoreValue;
+
+    [SerializeField] private Slider slider;
+    [SerializeField] private TextMeshProUGUI soundVolume;
+
     [SerializeField] private GameObject menu;
+
     [SerializeField] private Transform heartsContainer;
     [SerializeField] private Sprite emptyHeart;
     private Sprite fullHeart;
@@ -27,10 +32,14 @@ public class GameManager : MonoBehaviour
             hearts[i] = heartsContainer.GetChild(i).GetComponent<Image>();
 
         fullHeart = hearts[0].sprite;
+        slider.minValue = 0f;
+        slider.maxValue = 1f;
+        slider.value = 1f;
     }
     private void Start()
     {
         scoreValue.text = score.ToString();
+        soundVolume.text = "100%";
     }
 
     public void IncreaseScore()
@@ -47,6 +56,17 @@ public class GameManager : MonoBehaviour
     public void EndGame()
     {
 
+    }
+
+    public void UpdateSlider()
+    {
+        AudioListener.volume = slider.value;
+        soundVolume.text = ((int)(slider.value * 100f)).ToString() + "%";
+    }
+
+    public void MuteToggle()
+    {
+        AudioListener.pause = !AudioListener.pause;
     }
 
     public void Pause(InputAction.CallbackContext context)
