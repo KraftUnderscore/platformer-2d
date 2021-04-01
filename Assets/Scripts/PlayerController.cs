@@ -4,6 +4,8 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
+    public static PlayerController instance;
+
     [SerializeField] private int maxHealth;
     [SerializeField] private float immortalityTime;
 
@@ -39,6 +41,7 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
+        instance = this;
         rigid = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         sound = GetComponent<AudioSource>();
@@ -97,7 +100,7 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    private void GetDamage()
+    public void GetDamage()
     {
         if (!canTakeDamage) return;
 
